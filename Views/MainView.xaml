@@ -1,0 +1,75 @@
+﻿<catel:DataWindow  xmlns:catel="http://schemas.catelproject.com"
+                   x:Class="BooksLibrary.Views.MainWindow"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  Width="700"
+                  Height="400"
+                  ResizeMode="CanResize"
+                  ShowInTaskbar="True"
+                  SizeToContent="Manual"
+                  WindowStartupLocation="CenterScreen"
+                  WindowState="Normal">
+
+    <catel:DataWindow.Resources>
+
+        <Style x:Key="ImageEnabled" TargetType="Image">
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.25" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </catel:DataWindow.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="43" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="1"
+                  Margin="10"
+                  ItemsSource="{Binding BooksCollection}"
+                  SelectedItem="{Binding SelectedBook}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="200"
+                                    DisplayMemberBinding="{Binding Author}"
+                                    Header="Автор" />
+                    <GridViewColumn Width="200"
+                                    DisplayMemberBinding="{Binding Title}"
+                                    Header="Название" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ToolBar Grid.Row="0">
+            <Button Width="75"
+                    Height="22"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Command="{Binding AddCommand}"
+                    Focusable="False">
+                <Image Source="/MVVMCatelFullDemo;component/Images/add.ico" Style="{StaticResource ImageEnabled}" />
+            </Button>
+            <Button Width="75"
+                    Height="22"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Command="{Binding EditCommand}"
+                    Focusable="False">
+                <Image Source="/MVVMCatelFullDemo;component/Images/edit.ico" Style="{StaticResource ImageEnabled}" />
+            </Button>
+            <Button Width="75"
+                    Height="22"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Command="{Binding RemoveCommand}"
+                    Focusable="False">
+                <Image Source="/MVVMCatelFullDemo;component/Images/remove.ico" Style="{StaticResource ImageEnabled}" />
+            </Button>
+
+        </ToolBar>
+
+    </Grid>
+</catel:DataWindow>
